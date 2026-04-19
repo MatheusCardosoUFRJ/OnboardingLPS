@@ -3,6 +3,7 @@ import os
 import ast
 import pandas as pd
 import matplotlib.pyplot as plt
+from printDataframe import dataframeFromArgs
 
 RING_COUNT = 20
 
@@ -19,28 +20,28 @@ def extrairLista(valorStr):
 def main():
   if len(sys.argv) < 2:
     print("Erro: Você deve passar o caminho do CSV.")
-    print("Exemplo: python plotBoxplotGlobais.py subset.csv")
+    print("Exemplo: python plotBoxplotGlobais.py subset.csv 0")
+    print("Para fazer o boxplot dos primeiros 20 anéis")
     sys.exit(1)
 
   csvPath = sys.argv[1]
 
-  try: 
-    df = pd.read_csv(csvPath)
-  except FileNotFoundError:
-    print(f"Erro: Arquivo não encontrado no caminho '{csvPath}'.")
-    sys.exit(1)
-  except pd.errors.EmptyDataError:
-    print("Erro: O arquivo CSV fornecido está vazio.")
-    sys.exit(1)
-  except Exception as e:
-    print(f"Erro inesperado ao ler o CSV: {e}")
-    sys.exit(1)
+  startRing = 0
+  if len(sys.argv) >= 3:
+    try:
+      startRing = int(sys.argv[2])
+    except ValueError:
+        print("Erro: O argumento de anel inicial deve ser um número inteiro.")
+        sys.exit(1)
+
+  df = dataframeFromArgs(1)
 
   listas_aneis = df['TrigEMClusterContainer.ringsE'].apply(extrairLista).dropna()
 
-  df_aneis = pd.DataFrame(listas_aneis.tolist()).iloc[:, :RING_COUNT]
+  df_aneis = pd.DataFrame(listas_aneis.tolist()).iloc[:, startRing : startRing + RING_COUNT]
+  actualCount = df_aneis.shape[1]
   
-  df_aneis.columns = [rf'$E_{{{i}}}$' for i in range(RING_COUNT)]
+  df_aneis.columns = [rf'$E_{{{i}}}$' for i in range(startRing, startRing + actualCount)]
 
   plt.rcParams.update({
     "text.usetex": True,
@@ -94,9 +95,10 @@ def main():
   ax.set_axisbelow(True)
 
   cleanCSVPath = os.path.splitext(csvPath)[0]
-  base_name = os.path.basename(cleanCSVPath)
-  outputFilename = f"boxplot_aneis_{base_name}.png"
-  
+  baseName = os.path.basename(cleanCSVPath)
+  endRing = startRing + actualCount - 1
+  outputFilename = f"boxplot_aneis_{baseName}_{startRing}-{endRing}.png"
+
   plt.savefig(outputFilename, bbox_inches='tight', dpi=300)
 
 if __name__ == "__main__":
