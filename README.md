@@ -37,7 +37,7 @@ python scripts/plotHistogramaAnel.py subset.csv 0
 ```
 
 ### 4. Visualizar Boxplot Global
-Para gerar a visão comparativa dos 20 primeiros anéis:
+Para gerar a visão comparativa dos 20 primeiros anéis, o segundo argumento define o inicio região:
 ```bash
-python scripts/boxplotAneis.py subset.csv
+python scripts/boxplotAneis.py subset.csv 0
 ```
