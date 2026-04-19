@@ -6,10 +6,12 @@ Este repositório contém scripts em Python desenvolvidos para processar, analis
 
 Os principais scripts de análise e visualização encontram-se no diretório `scripts/`:
 
+* **`printDataframe.py`**: Imprime o DataFrame no terminal.
 * **`plotHistogram.py`**: Gera histogramas estilizados para variáveis globais do evento e métricas do cluster (`et`, `eta`, `phi`, `avgmu`).
 * **`plotHistogramaAnel.py`**: Isola os dados de listas e plota a distribuição de energia depositada em um anel específico do calorímetro.
 * **`boxplotAneis.py`**: Cria um boxplot em escala logarítmica comparando a distribuição global de energia ao longo de até 20 anéis do calorímetro.
-* **`printDataframe.py`**: Imprime o DataFrame no terminal.
+
+Cada script é usado também como blibioteca, auxiliando na missão subsequente.
 
 ## ⚙️ Como Usar
 
