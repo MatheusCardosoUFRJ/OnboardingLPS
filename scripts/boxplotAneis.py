@@ -19,12 +19,12 @@ def extrairLista(valorStr):
 
 def main():
   if len(sys.argv) < 2:
-    print("Erro: Você deve passar o caminho do CSV.")
+    print("Erro: Você deve passar o caminho do arquivo de dados.")
     print("Exemplo: python plotBoxplotGlobais.py subset.csv 0")
     print("Para fazer o boxplot dos primeiros 20 anéis")
     sys.exit(1)
 
-  csvPath = sys.argv[1]
+  path = sys.argv[1]
 
   startRing = 0
   if len(sys.argv) >= 3:
@@ -94,8 +94,8 @@ def main():
   ax.grid(axis='y', linestyle='--', alpha=0.5)
   ax.set_axisbelow(True)
 
-  cleanCSVPath = os.path.splitext(csvPath)[0]
-  baseName = os.path.basename(cleanCSVPath)
+  cleanPath = os.path.splitext(path)[0]
+  baseName = os.path.basename(cleanPath)
   endRing = startRing + actualCount - 1
   outputFilename = f"boxplot_aneis_{baseName}_{startRing}-{endRing}.png"
 

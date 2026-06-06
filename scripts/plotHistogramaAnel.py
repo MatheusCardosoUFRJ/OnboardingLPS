@@ -25,11 +25,11 @@ def extrairAnel(valor_str, indiceAnel):
 
 def main():
   if len(sys.argv) < 3:
-    print("Erro: Você deve passar o caminho do CSV e o índice do anel como entradas.")
+    print("Erro: Você deve passar o caminho do arquivo de dados e o índice do anel como entradas.")
     print("Exemplo: plotHistogramaAnel.py subset.csv 0")
     sys.exit(1)
 
-  csvPath = sys.argv[1]
+  path = sys.argv[1]
   df = dataframeFromArgs(1)
   
   try:
@@ -41,7 +41,7 @@ def main():
   coluna = "TrigEMClusterContainer.ringsE"
 
   if coluna not in df.columns:
-    print(f"Erro: A coluna '{coluna}' não foi encontrada no CSV.")
+    print(f"Erro: A coluna '{coluna}' não foi encontrada no arquivo de dados.")
     sys.exit(1)
 
   dadosAnel = df[coluna].apply(lambda x: extrairAnel(x, indiceAnel)).dropna()
@@ -53,8 +53,8 @@ def main():
   titulo = f'Distribuição de Energia depositada no Anel {indiceAnel}'
   label = rf'$E_{{{indiceAnel}}}$'
 
-  cleanCSVPath = os.path.splitext(csvPath)[0]
-  outputFilename = f"histograma_{cleanCSVPath}_anel{indiceAnel}.png"
+  cleanPath = os.path.splitext(path)[0]
+  outputFilename = f"histograma_{cleanPath}_anel{indiceAnel}.png"
 
   plotHistogram(label, ' [MeV]', dadosAnel, titulo, 
     outputFilename, True, False)

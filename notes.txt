@@ -1,0 +1,21 @@
+Algoritmo de segmentação em regiões 1D 'Jenks Natural Breaks'
+Tentativa Falha
+
+Encontradas Regiões de Pseudorapidez na tese do joão
+Pré-amostrador (PS): 
+  Barril: |n| < 1.52
+  Tampa: 1.5 < |n| < 1.8
+
+Eletromagnético:
+  Barril: |n| < 1.475
+  Tampa (EMEC): 1.375 < |n| < 3.2
+
+Had. Telhas Cintilantes (TileCal):
+  Barril: |n| < 1.0
+  Barill Estendido: 0.8 < |n| < 1.7
+
+Had. Argônio Líquido (HEC):
+  Tampa: 1.5 < |n| < 3.2
+
+Calorimetro Dianteiro (FCal)
+  Dianteiro: 3.1 < |n| < 4.9

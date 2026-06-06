@@ -79,11 +79,11 @@ def plotHistogram(label, unidade, dados, titulo, filename, logy=False, piTicks=F
 
 def main():
   if len(sys.argv) < 3:
-    print("Erro: Você deve passar o caminho do CSV e o nome da variável como entradas.")
+    print("Erro: Você deve passar o caminho do arquivo de dados e o nome da variável como entradas.")
     print("Exemplo: plotHistogram.py subset.csv et")
     sys.exit(1)
 
-  csvPath = sys.argv[1]
+  path = sys.argv[1]
   variavel = sys.argv[2]
 
   df = dataframeFromArgs(1)
@@ -94,7 +94,7 @@ def main():
     coluna = f"TrigEMClusterContainer.{variavel}"
 
   if coluna not in df.columns:
-    print(f"Erro: A coluna para '{variavel}' não foi encontrada no CSV.")
+    print(f"Erro: A coluna para '{variavel}' não foi encontrada no arquivo de dados.")
     sys.exit(1)
   
   latexLabels = {
@@ -114,8 +114,8 @@ def main():
   label = latexLabels.get(variavel, variavel)
   unidade = unidades.get(variavel, '')
 
-  cleanCSVPath = os.path.splitext(csvPath)[0]
-  outputFilename = f"histograma_{cleanCSVPath}_{variavel}.png"
+  cleanPath = os.path.splitext(path)[0]
+  outputFilename = f"histograma_{cleanPath}_{variavel}.png"
   logy = variavel == 'et'
   piTicks = variavel == 'phi'
 
