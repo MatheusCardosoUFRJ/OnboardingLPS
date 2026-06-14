@@ -33,6 +33,7 @@ def main():
   df = dataframeFromArgs(1)
   
   print(df)
+  df.to_parquet("subset.parquet", index=False)
 
 if __name__ == "__main__":
     main()
